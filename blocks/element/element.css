@@ -2,8 +2,9 @@
   padding: 50px 0 67px;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  grid-template-columns: repeat(auto-fit, 282px);
   column-gap: 17px;
   row-gap: 20px;
   list-style: none;
+  justify-content: center;
 }

@@ -8,3 +8,17 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+@media screen and (max-width: 880px) {
+  .profile__name {
+    font-size: calc(15px + (42 + 42 * 0.7) * ((100vw - 320px) / 880));
+    line-height: calc(17px + (48 + 48 * 0.7) * ((100vw - 320px) / 880));
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__name {
+    font-size: 27px;
+    line-height: 33px;
+  }
+}
