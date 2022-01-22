@@ -13,3 +13,12 @@
   opacity: 0.6;
   transition: 0.3s;
 }
+
+@media screen and (max-width: 880px) {
+  .profile__add-gallery {
+    margin-top: 36px;
+    min-width: 282px;
+    min-height: 50px;
+    background-image: url(../../../images/addbuttonbig.svg);
+  }
+}

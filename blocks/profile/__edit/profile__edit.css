@@ -13,3 +13,11 @@
   opacity: 0.6;
   transition: 0.3s;
 }
+
+@media screen and (max-width: 880px) {
+  .profile__edit {
+    width: 18px;
+    height: 18px;
+    background-size: contain;
+  }
+}
