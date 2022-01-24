@@ -1,14 +1,24 @@
 .popup__profession {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border: none;
   font-size: 14px;
   line-height: 17px;
   margin: 0;
   margin-bottom: 48px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  width: 358px;
+}
+
+.popup__profession:focus {
+  outline: none;
 }
 
 @media screen and (max-width: 880px) {
   .popup__profession {
     margin-bottom: 45px;
+    width: 238px;
   }
 }
