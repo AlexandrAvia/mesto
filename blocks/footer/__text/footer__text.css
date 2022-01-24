@@ -1,4 +1,4 @@
-.footer_text {
+.footer__text {
   font-size: 18px;
   line-height: 22px;
   margin: 0;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 880px) {
-  .footer_text {
+  .footer__text {
     padding-bottom: 36px;
     padding-left: 5.93%;
   }
