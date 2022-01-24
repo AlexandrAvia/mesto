@@ -1,7 +1,6 @@
 let OpenPopupButton = document.querySelector('.profile__edit')
 let popup = document.querySelector('.popup')
 let popupCloseButton = document.querySelector('.popup__close')
-let popupContainer = document.querySelector('.popup__container')
 let formElement = document.querySelector('.popup__form')
 let formsave = document.querySelector('.popup__submit')
 let nameInput = document.querySelector('.popup__name')
