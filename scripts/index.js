@@ -9,13 +9,13 @@ let profileName = document.querySelector('.profile__name')
 let profileProfession = document.querySelector('.profile__profession')
 
 function openPopup() {
-  popup.classList.add('popup__opened')
+  popup.classList.add('popup_opened')
   nameInput.value = profileName.textContent
   jobInput.value = profileProfession.textContent;
 }
 
 function closePopup() {
-  popup.classList.remove('popup__opened')
+  popup.classList.remove('popup_opened')
 }
 
 function formSubmitHandler(evt) {
