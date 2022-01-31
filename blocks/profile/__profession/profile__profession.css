@@ -12,7 +12,7 @@
 @media screen and (max-width: 880px) {
   .profile__profession {
     text-align: center;
-    padding-top: 14px;
+    padding-top: 7px;
     font-size: calc(4px + (18 + 18 * 0.7) * ((100vw - 320px) / 880));
     line-height: calc(5px + (22 + 22 * 0.7) * ((100vw - 320px) / 880));
   }
@@ -22,5 +22,7 @@
   .profile__profession {
     font-size: 14px;
     line-height: 17px;
+    max-width: 190px;
+    margin: 0 auto;
   }
 }
