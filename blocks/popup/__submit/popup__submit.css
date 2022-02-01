@@ -17,8 +17,7 @@
 
 @media screen and (max-width: 880px) {
   .popup__submit {
-    width: 238px;
-    height: 46px;
-    background-image: url(../../../images/SubmitButtons.svg);
+    background-size: 238px 46px;
+    background-repeat: no-repeat;
   }
 }

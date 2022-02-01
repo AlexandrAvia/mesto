@@ -12,11 +12,11 @@
   cursor: pointer;
   top: -40px;
   right: -40px;
+  transition: 0.3s;
 }
 
 .popup__close:hover {
   opacity: 0.6;
-  transition: 0.3s;
 }
 
 @media screen and (max-width: 880px) {
