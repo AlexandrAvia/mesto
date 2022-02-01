@@ -41,7 +41,7 @@
             />
             <div class="element__caption">
               <p class="element__title">Карачаевск</p>
-              <button class="element__like-button"></button>
+              <button class="element__like-button" type="button"></button>
             </div>
           </li>
           <li class="element__card">
@@ -52,7 +52,7 @@
             />
             <div class="element__caption">
               <p class="element__title">Гора Эльбрус</p>
-              <button class="element__like-button"></button>
+              <button class="element__like-button" type="button"></button>
             </div>
           </li>
           <li class="element__card">
@@ -63,7 +63,7 @@
             />
             <div class="element__caption">
               <p class="element__title">Домбай</p>
-              <button class="element__like-button"></button>
+              <button class="element__like-button" type="button"></button>
             </div>
           </li>
           <li class="element__card">
@@ -74,7 +74,7 @@
             />
             <div class="element__caption">
               <p class="element__title">Гора Эльбрус</p>
-              <button class="element__like-button"></button>
+              <button class="element__like-button" type="button"></button>
             </div>
           </li>
           <li class="element__card">
@@ -85,7 +85,7 @@
             />
             <div class="element__caption">
               <p class="element__title">Домбай</p>
-              <button class="element__like-button"></button>
+              <button class="element__like-button" type="button"></button>
             </div>
           </li>
           <li class="element__card">
@@ -95,8 +95,8 @@
               class="element__image"
             />
             <div class="element__caption">
-              <p class="element__title">Карачаево-Черкессия</p>
-              <button class="element__like-button"></button>
+              <p class="element__title">Карачаевск</p>
+              <button class="element__like-button" type="button"></button>
             </div>
           </li>
         </ul>
@@ -107,11 +107,21 @@
     </footer>
     <article class="popup">
       <div class="popup__container">
-        <button class="popup__close"></button>
+        <button class="popup__close" type="reset"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form">
-          <input type="text" class="popup__name" placeholder="" />
-          <input type="text" class="popup__profession" placeholder="" />
+        <form class="popup__form" name="form__input">
+          <input
+            type="text"
+            class="popup__name"
+            name="form__name"
+            placeholder="Жак-Ив Кусто"
+          />
+          <input
+            type="text"
+            class="popup__profession"
+            name="form__profession"
+            placeholder="Исследователь океана"
+          />
           <button class="popup__submit" type="submit"></button>
         </form>
       </div>
