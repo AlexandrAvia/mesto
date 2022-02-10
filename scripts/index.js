@@ -29,3 +29,19 @@ OpenPopupButton.addEventListener('click', openPopup)
 popupCloseButton.addEventListener('click', closePopup)
 formElement.addEventListener('submit', formSubmitHandler)
 
+const template = document.querySelector('.element-template').content;
+const elements = document.querySelector('.element')
+
+function render() {
+  initialCards.forEach(renderItem)
+}
+
+function renderItem(cards) {
+  const newCard = template.cloneNode(true)
+  newCard.querySelector('.element__title').innerText = cards.name
+  newCard.querySelector('.element__image').src = cards.link
+
+  elements.appendChild(newCard)
+}
+ render()
+
