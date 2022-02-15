@@ -55,7 +55,7 @@
       <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
     <!-- popup profile edit -->
-    <article class="popup popup_form_profile">
+    <article class="popup popup_type_profile">
       <div class="popup__container">
         <button class="popup__close" type="reset"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -79,7 +79,7 @@
       </div>
     </article>
     <!-- popup add gallery card  -->
-    <article class="popup popup_form_gallery">
+    <article class="popup popup_type_gallery">
       <div class="popup__container">
         <button class="popup__close popup__close_gallery" type="reset"></button>
         <h2 class="popup__title">Новое место</h2>
@@ -103,7 +103,13 @@
       </div>
     </article>
     <!-- popup big photo -->
-    <article class="popup popup_form_foto"></article>
+    <article class="popup popup_type_photo">
+      <div class="popup__container popup__container_photo">
+        <img src="" alt="" class="popup__image" />
+        <p class="popup__image-title"></p>
+        <button class="popup__close popup__close_photo" type="reset"></button>
+      </div>
+    </article>
     <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
