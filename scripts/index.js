@@ -1,23 +1,23 @@
-let popupProf = document.querySelector('.popup_type_profile')
-let popupGallery = document.querySelector('.popup_type_gallery')
-let popupImage = document.querySelector('.popup_type_photo')
-let closePopupImage = document.querySelector('.popup__close_photo')
-let popupCloseButton = document.querySelector('.popup__close')
-let formElement = document.querySelector('.popup__form_profile')
-let formsave = document.querySelector('.popup__submit_profile')
-let nameInput = document.querySelector('.popup__input_form_name')
-let jobInput = document.querySelector('.popup__input_form_profession')
-let profileName = document.querySelector('.profile__name')
-let profileProfession = document.querySelector('.profile__profession')
-let OpenPopupButtonGallery = document.querySelector('.profile__add-gallery')
-let OpenPopupButtonProf = document.querySelector('.profile__edit')
-let CloseButtonPopupGallAdd = document.querySelector('.popup__close_gallery')
-let imageTitleform = document.querySelector('.popup__input_form_image-title')
-let imagesrcform = document.querySelector('.popup__input_form_image-src')
-let cardAddbutton = document.querySelector('.popup__submit_add')
-let galleryAddform = document.querySelector('.popup__form_gallery')
-let template = document.querySelector('.element-template').content;
-let elements = document.querySelector('.element')
+const popupProf = document.querySelector('.popup_type_profile')
+const popupGallery = document.querySelector('.popup_type_gallery')
+const popupImage = document.querySelector('.popup_type_photo')
+const closePopupImage = document.querySelector('.popup__close_photo')
+const popupCloseButton = document.querySelector('.popup__close')
+const formElement = document.querySelector('.popup__form_profile')
+const formsave = document.querySelector('.popup__submit_profile')
+const nameInput = document.querySelector('.popup__input_form_name')
+const jobInput = document.querySelector('.popup__input_form_profession')
+const profileName = document.querySelector('.profile__name')
+const profileProfession = document.querySelector('.profile__profession')
+const OpenPopupButtonGallery = document.querySelector('.profile__add-gallery')
+const OpenPopupButtonProf = document.querySelector('.profile__edit')
+const CloseButtonPopupGallAdd = document.querySelector('.popup__close_gallery')
+const imageTitleform = document.querySelector('.popup__input_form_image-title')
+const imagesrcform = document.querySelector('.popup__input_form_image-src')
+const cardAddbutton = document.querySelector('.popup__submit_add')
+const galleryAddform = document.querySelector('.popup__form_gallery')
+const template = document.querySelector('.element-template').content;
+const elements = document.querySelector('.element')
 
 function openPopup(popup) {
   popup.classList.add('popup_opened')
@@ -66,9 +66,9 @@ CloseButtonPopupGallAdd.addEventListener('click', ClosePopupGallAdd)
 
 
 function cardCreate(name, link) {
-  let newCard = template.cloneNode(true)
-  let imageCard = newCard.querySelector('.element__image')
-  let imageTitle = newCard.querySelector('.element__title')
+  const newCard = template.cloneNode(true)
+  const imageCard = newCard.querySelector('.element__image')
+  const imageTitle = newCard.querySelector('.element__title')
 
   imageTitle.textContent = name
   imageCard.src = link
