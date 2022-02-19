@@ -9,9 +9,9 @@ const nameInput = document.querySelector('.popup__input_form_name')
 const jobInput = document.querySelector('.popup__input_form_profession')
 const profileName = document.querySelector('.profile__name')
 const profileProfession = document.querySelector('.profile__profession')
-const OpenPopupButtonGallery = document.querySelector('.profile__add-gallery')
-const OpenPopupButtonProf = document.querySelector('.profile__edit')
-const CloseButtonPopupGallAdd = document.querySelector('.popup__close_gallery')
+const openPopupButtonGallery = document.querySelector('.profile__add-gallery')
+const openPopupButtonProf = document.querySelector('.profile__edit')
+const closeButtonPopupGallAdd = document.querySelector('.popup__close_gallery')
 const imageTitleform = document.querySelector('.popup__input_form_image-title')
 const imagesrcform = document.querySelector('.popup__input_form_image-src')
 const cardAddbutton = document.querySelector('.popup__submit_add')
@@ -27,7 +27,7 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened')
 }
 
-function OpenPopupProfEdit() {
+function openPopupProfEdit() {
   openPopup(popupProf)
   nameInput.value = profileName.textContent
   jobInput.value = profileProfession.textContent;
@@ -45,24 +45,24 @@ function formSubmitHandler(evt) {
 }
 
 
-OpenPopupButtonProf.addEventListener('click', OpenPopupProfEdit)
+openPopupButtonProf.addEventListener('click', openPopupProfEdit)
 popupCloseButton.addEventListener('click', closePopupProfEdit)
 formElement.addEventListener('submit', formSubmitHandler)
 
 
 
-function OpenPopupGallAdd() {
+function openPopupGallAdd() {
   openPopup(popupGallery)
   imageTitleform.value = ''
   imagesrcform.value = ''
 }
 
-function ClosePopupGallAdd() {
+function closePopupGallAdd() {
   closePopup(popupGallery)
 }
 
-OpenPopupButtonGallery.addEventListener('click', OpenPopupGallAdd)
-CloseButtonPopupGallAdd.addEventListener('click', ClosePopupGallAdd)
+openPopupButtonGallery.addEventListener('click', openPopupGallAdd)
+closeButtonPopupGallAdd.addEventListener('click', closePopupGallAdd)
 
 
 function cardCreate(name, link) {
@@ -79,15 +79,19 @@ function cardCreate(name, link) {
   imageCard.addEventListener('click', openImage)
   closePopupImage.addEventListener('click',closeImage)
 
-  elements.prepend(newCard)
+  return newCard
 }
 
-initialCards.forEach((card) => cardCreate(card.name, card.link))
+function addCard(name, link) {
+  elements.prepend(cardCreate(name, link))
+}
+
+initialCards.forEach((card) => addCard(card.name, card.link))
 
 function cardSubmit(evt) {
   evt.preventDefault();
-  cardCreate(imageTitleform.value, imagesrcform.value)
-  ClosePopupGallAdd()
+  addCard(imageTitleform.value, imagesrcform.value)
+  closePopupGallAdd()
 }
 
 galleryAddform.addEventListener('submit', cardSubmit)
@@ -102,7 +106,8 @@ function likeCard(event) {
 
 function openImage(evt) {
   openPopup(popupImage);
-  document.querySelector('.popup__image-title').textContent =  evt.target.alt;
+  document.querySelector('.popup__image-title').textContent = evt.target.alt;
+  document.querySelector('.popup__image-title').alt =  evt.target.alt;
   document.querySelector('.popup__image').src = evt.target.src;
 }
 
