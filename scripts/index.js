@@ -21,11 +21,29 @@ const elements = document.querySelector('.element')
 
 function openPopup(popup) {
   popup.classList.add('popup_opened')
+  document.addEventListener('keydown', closePopupKeyEsc);
+  popup.addEventListener('click', closePopupOutClick)
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened')
+  document.removeEventListener('keydown', closePopupKeyEsc);
+  popup.removeEventListener('click', closePopupOutClick)
 }
+
+function closePopupKeyEsc(evt) {
+   if (evt.key === "Escape") {
+    closePopup(document.querySelector(".popup_opened"));
+  }
+}
+
+function closePopupOutClick(event) {
+  if (event.target === event.currentTarget) {
+    closePopup(event.target);
+  }
+}
+
+
 
 function openPopupProfEdit() {
   openPopup(popupProf)
