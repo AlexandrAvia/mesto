@@ -15,6 +15,8 @@ const galleryAddform = document.querySelector('.popup__form_gallery')
 const template = document.querySelector('.element-template').content;
 const elements = document.querySelector('.element')
 const popups = document.querySelectorAll('.popup')
+const popupPicture = document.querySelector('.popup__image')
+const popupImageTitle = document.querySelector('.popup__image-title')
 const params = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -106,9 +108,9 @@ function likeCard(event) {
 
 function openImage(evt) {
   openPopup(popupImage);
-  document.querySelector('.popup__image-title').textContent = evt.target.alt;
-  document.querySelector('.popup__image-title').alt =  evt.target.alt;
-  document.querySelector('.popup__image').src = evt.target.src;
+  popupImageTitle.textContent = evt.target.alt;
+  popupPicture.alt =  evt.target.alt;
+  popupPicture.src = evt.target.src;
 }
 
 popups.forEach((popup) => {
