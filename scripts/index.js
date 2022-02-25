@@ -2,9 +2,8 @@ const popupProf = document.querySelector('.popup_type_profile')
 const popupGallery = document.querySelector('.popup_type_gallery')
 const popupImage = document.querySelector('.popup_type_photo')
 const closePopupImage = document.querySelector('.popup__close_photo')
-const popupCloseButton = document.querySelector('.popup__close')
-const formElement = document.querySelector('.popup__form_profile')
-const formsave = document.querySelector('.popup__submit_profile')
+const closeProfileButton = document.querySelector('.popup__close')
+const profileForm = document.querySelector('.popup__form_profile')
 const nameInput = document.querySelector('.popup__input_form_name')
 const jobInput = document.querySelector('.popup__input_form_profession')
 const profileName = document.querySelector('.profile__name')
@@ -13,7 +12,7 @@ const openPopupButtonGallery = document.querySelector('.profile__add-gallery')
 const openPopupButtonProf = document.querySelector('.profile__edit')
 const closeButtonPopupGallAdd = document.querySelector('.popup__close_gallery')
 const imageTitleform = document.querySelector('.popup__input_form_image-title')
-const imagesrcform = document.querySelector('.popup__input_form_image-src')
+const imageSrcForm = document.querySelector('.popup__input_form_image-src')
 const cardAddbutton = document.querySelector('.popup__submit_add')
 const galleryAddform = document.querySelector('.popup__form_gallery')
 const template = document.querySelector('.element-template').content;
@@ -55,7 +54,7 @@ function closePopupProfEdit() {
   closePopup(popupProf)
 }
 
-function formSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileProfession.textContent = jobInput.value;
@@ -64,15 +63,13 @@ function formSubmitHandler(evt) {
 
 
 openPopupButtonProf.addEventListener('click', openPopupProfEdit)
-popupCloseButton.addEventListener('click', closePopupProfEdit)
-formElement.addEventListener('submit', formSubmitHandler)
+closeProfileButton.addEventListener('click', closePopupProfEdit)
+profileForm.addEventListener('submit', handleProfileFormSubmit)
 
 
 
 function openPopupGallAdd() {
   openPopup(popupGallery)
-  imageTitleform.value = ''
-  imagesrcform.value = ''
 }
 
 function closePopupGallAdd() {
@@ -108,7 +105,8 @@ initialCards.forEach((card) => addCard(card.name, card.link))
 
 function cardSubmit(evt) {
   evt.preventDefault();
-  addCard(imageTitleform.value, imagesrcform.value)
+  addCard(imageTitleform.value, imageSrcForm.value)
+  galleryAddform.reset()
   closePopupGallAdd()
 }
 
