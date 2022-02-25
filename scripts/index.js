@@ -1,8 +1,6 @@
 const popupProf = document.querySelector('.popup_type_profile')
 const popupGallery = document.querySelector('.popup_type_gallery')
 const popupImage = document.querySelector('.popup_type_photo')
-const closePopupImage = document.querySelector('.popup__close_photo')
-const closeProfileButton = document.querySelector('.popup__close')
 const profileForm = document.querySelector('.popup__form_profile')
 const nameInput = document.querySelector('.popup__input_form_name')
 const jobInput = document.querySelector('.popup__input_form_profession')
@@ -10,24 +8,30 @@ const profileName = document.querySelector('.profile__name')
 const profileProfession = document.querySelector('.profile__profession')
 const openPopupButtonGallery = document.querySelector('.profile__add-gallery')
 const openPopupButtonProf = document.querySelector('.profile__edit')
-const closeButtonPopupGallAdd = document.querySelector('.popup__close_gallery')
 const imageTitleform = document.querySelector('.popup__input_form_image-title')
 const imageSrcForm = document.querySelector('.popup__input_form_image-src')
 const cardAddbutton = document.querySelector('.popup__submit_add')
 const galleryAddform = document.querySelector('.popup__form_gallery')
 const template = document.querySelector('.element-template').content;
 const elements = document.querySelector('.element')
+const popups = document.querySelectorAll('.popup')
+const params = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_inactive",
+  inputErrorClass: "popup__input_error",
+  errorClass: "popup__error_visible",
+}
 
 function openPopup(popup) {
   popup.classList.add('popup_opened')
   document.addEventListener('keydown', closePopupKeyEsc);
-  popup.addEventListener('click', closePopupOutClick)
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened')
   document.removeEventListener('keydown', closePopupKeyEsc);
-  popup.removeEventListener('click', closePopupOutClick)
 }
 
 function closePopupKeyEsc(evt) {
@@ -36,22 +40,11 @@ function closePopupKeyEsc(evt) {
   }
 }
 
-function closePopupOutClick(event) {
-  if (event.target === event.currentTarget) {
-    closePopup(event.target);
-  }
-}
-
-
 
 function openPopupProfEdit() {
   openPopup(popupProf)
   nameInput.value = profileName.textContent
   jobInput.value = profileProfession.textContent;
-}
-
-function closePopupProfEdit() {
-  closePopup(popupProf)
 }
 
 function handleProfileFormSubmit(evt) {
@@ -61,24 +54,15 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupProf);
 }
 
-
 openPopupButtonProf.addEventListener('click', openPopupProfEdit)
-closeProfileButton.addEventListener('click', closePopupProfEdit)
 profileForm.addEventListener('submit', handleProfileFormSubmit)
-
-
 
 function openPopupGallAdd() {
   openPopup(popupGallery)
-}
-
-function closePopupGallAdd() {
-  closePopup(popupGallery)
+  disableSubmitButton(popupGallery.querySelector(params.submitButtonSelector))
 }
 
 openPopupButtonGallery.addEventListener('click', openPopupGallAdd)
-closeButtonPopupGallAdd.addEventListener('click', closePopupGallAdd)
-
 
 function cardCreate(name, link) {
   const newCard = template.cloneNode(true)
@@ -92,7 +76,6 @@ function cardCreate(name, link) {
   newCard.querySelector('.element__like-button').addEventListener('click', likeCard)
   newCard.querySelector('.element__delete-button').addEventListener('click', deleteCard)
   imageCard.addEventListener('click', openImage)
-  closePopupImage.addEventListener('click',closeImage)
 
   return newCard
 }
@@ -103,14 +86,15 @@ function addCard(name, link) {
 
 initialCards.forEach((card) => addCard(card.name, card.link))
 
-function cardSubmit(evt) {
+function handleCardSubmitForm(evt) {
   evt.preventDefault();
   addCard(imageTitleform.value, imageSrcForm.value)
   galleryAddform.reset()
-  closePopupGallAdd()
+  closePopup(popupGallery)
+  disableSubmitButton(popupGallery.querySelector(params.submitButtonSelector))
 }
 
-galleryAddform.addEventListener('submit', cardSubmit)
+galleryAddform.addEventListener('submit', handleCardSubmitForm)
 
 function deleteCard(event) {
   event.target.closest(".element__card").remove();
@@ -127,10 +111,16 @@ function openImage(evt) {
   document.querySelector('.popup__image').src = evt.target.src;
 }
 
-function closeImage() {
-  closePopup(popupImage)
-}
-
+popups.forEach((popup) => {
+          popup.addEventListener('mousedown', (evt) => {
+              if (evt.target.classList.contains('popup_opened')) {
+                  closePopup(popup)
+              }
+              if (evt.target.classList.contains('popup__close')) {
+                closePopup(popup)
+              }
+          })
+      })
 
 
 
