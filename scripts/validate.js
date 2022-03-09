@@ -1,5 +1,3 @@
-
-
 function showInputError(formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(params.inputErrorClass);
@@ -16,11 +14,7 @@ function hideInputError(formElement, inputElement) {
 
 function checkInputValidity(formElement, inputElement) {
   if (!inputElement.validity.valid) {
-    showInputError(
-      formElement,
-      inputElement,
-      inputElement.validationMessage
-    );
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
     hideInputError(formElement, inputElement);
   }
@@ -59,9 +53,9 @@ function hasInvalidInput(inputList) {
 
 function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
-    disableSubmitButton(buttonElement)
+    disableSubmitButton(buttonElement);
   } else {
-    enableSubmitButton(buttonElement)
+    enableSubmitButton(buttonElement);
   }
 }
 
@@ -75,7 +69,4 @@ function disableSubmitButton(buttonElement) {
   buttonElement.setAttribute("disabled", true);
 }
 
-
-
-enableValidation(params)
-
+enableValidation(params);
