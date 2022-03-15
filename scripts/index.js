@@ -12,7 +12,7 @@ const openPopupButtonProf = document.querySelector(".profile__edit");
 const imageTitleform = document.querySelector(".popup__input_form_image-title");
 const imageSrcForm = document.querySelector(".popup__input_form_image-src");
 const galleryAddform = document.querySelector(".popup__form_gallery");
-const template = document.querySelector(".element-template").content;
+//const template = document.querySelector(".element-template").content;
 const elements = document.querySelector(".element");
 const popups = document.querySelectorAll(".popup");
 const popupPicture = document.querySelector(".popup__image");
@@ -52,6 +52,7 @@ function openPopupProfEdit() {
   openPopup(popupProf);
   nameInput.value = profileName.textContent;
   jobInput.value = profileProfession.textContent;
+  editProfileValidator.resetErrors();
 }
 
 function handleProfileFormSubmit(evt) {
@@ -66,14 +67,12 @@ profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 function openPopupGallAdd() {
   openPopup(popupGallery);
-  addCardValidator.disableSubmitButton(
-    popupGallery.querySelector(validationConfig.submitButtonSelector)
-  );
+  addCardValidator.disableSubmitButton();
 }
 
 openPopupButtonGallery.addEventListener("click", openPopupGallAdd);
 
-function cardCreate(name, link) {
+/* function cardCreate(name, link) {
   const newCard = template.cloneNode(true);
   const imageCard = newCard.querySelector(".element__image");
   const imageTitle = newCard.querySelector(".element__title");
@@ -91,7 +90,7 @@ function cardCreate(name, link) {
   imageCard.addEventListener("click", openImage);
 
   return newCard;
-}
+} */
 
 function addCard(name, link) {
   elements.prepend(cardCreate(name, link));
@@ -111,13 +110,13 @@ function handleCardSubmitForm(evt) {
 
 galleryAddform.addEventListener("submit", handleCardSubmitForm);
 
-function deleteCard(event) {
+/* function deleteCard(event) {
   event.target.closest(".element__card").remove();
-}
+} */
 
-function likeCard(event) {
+/* function likeCard(event) {
   event.target.classList.toggle("element__like-button_active");
-}
+} */
 
 function openImage(evt) {
   openPopup(popupImage);
