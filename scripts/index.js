@@ -1,4 +1,5 @@
 import { FormValidator } from "./FormValidator.js";
+import { Card, initialCards } from "./Card.js";
 const popupProf = document.querySelector(".popup_type_profile");
 const popupGallery = document.querySelector(".popup_type_gallery");
 const popupImage = document.querySelector(".popup_type_photo");
@@ -12,7 +13,6 @@ const openPopupButtonProf = document.querySelector(".profile__edit");
 const imageTitleform = document.querySelector(".popup__input_form_image-title");
 const imageSrcForm = document.querySelector(".popup__input_form_image-src");
 const galleryAddform = document.querySelector(".popup__form_gallery");
-//const template = document.querySelector(".element-template").content;
 const elements = document.querySelector(".element");
 const popups = document.querySelectorAll(".popup");
 const popupPicture = document.querySelector(".popup__image");
@@ -72,26 +72,6 @@ function openPopupGallAdd() {
 
 openPopupButtonGallery.addEventListener("click", openPopupGallAdd);
 
-/* function cardCreate(name, link) {
-  const newCard = template.cloneNode(true);
-  const imageCard = newCard.querySelector(".element__image");
-  const imageTitle = newCard.querySelector(".element__title");
-
-  imageTitle.textContent = name;
-  imageCard.src = link;
-  imageCard.alt = name;
-
-  newCard
-    .querySelector(".element__like-button")
-    .addEventListener("click", likeCard);
-  newCard
-    .querySelector(".element__delete-button")
-    .addEventListener("click", deleteCard);
-  imageCard.addEventListener("click", openImage);
-
-  return newCard;
-} */
-
 function addCard(name, link) {
   elements.prepend(cardCreate(name, link));
 }
@@ -103,26 +83,21 @@ function handleCardSubmitForm(evt) {
   addCard(imageTitleform.value, imageSrcForm.value);
   galleryAddform.reset();
   closePopup(popupGallery);
-  addCardValidator.disableSubmitButton(
-    popupGallery.querySelector(validationConfig.submitButtonSelector)
-  );
+  addCardValidator.disableSubmitButton();
 }
 
 galleryAddform.addEventListener("submit", handleCardSubmitForm);
 
-/* function deleteCard(event) {
-  event.target.closest(".element__card").remove();
-} */
+function cardCreate(link, title) {
+  const card = new Card(link, title, ".element-template", openImage);
+  return card.cardCreate();
+}
 
-/* function likeCard(event) {
-  event.target.classList.toggle("element__like-button_active");
-} */
-
-function openImage(evt) {
+function openImage(name, link) {
   openPopup(popupImage);
-  popupImageTitle.textContent = evt.target.alt;
-  popupPicture.alt = evt.target.alt;
-  popupPicture.src = evt.target.src;
+  popupImageTitle.textContent = name;
+  popupPicture.alt = name;
+  popupPicture.src = link;
 }
 
 popups.forEach((popup) => {

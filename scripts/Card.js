@@ -1,30 +1,54 @@
-export class Card {
-  constructor(initialCards, cardTemplateSelector) {
+export { Card, initialCards };
+
+const initialCards = [
+  {
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
+];
+class Card {
+  constructor(name, link, cardTemplateSelector, handleImageClick) {
     this._template = document.querySelector(cardTemplateSelector).content;
-    this._name = initialCards.name;
-    this._link = initialCards.link;
+    this._name = name;
+    this._link = link;
+    this._handleImageClick = handleImageClick;
   }
 
   _likeCard = () => {
     this._likeButton.classList.toggle("element__like-button_active");
   };
 
-  _deleteCard = () => {
-    this._newCard.remove();
+  _deleteCard = (evt) => {
+    evt.target.closest(".element__card").remove();
   };
-
-  _openImage(evt) {
-    openPopup(popupImage);
-    popupImageTitle.textContent = evt.target.alt;
-    popupPicture.alt = evt.target.alt;
-    popupPicture.src = evt.target.src;
-  }
 
   _setEventListeners() {
     const deleteButton = this._newCard.querySelector(".element__delete-button");
-    this._likeButton.addEventListener("click", _likeCard);
-    deleteButton.addEventListener("click", _deleteCard);
-    this._imageCard.addEventListener("click", openImage);
+    this._likeButton.addEventListener("click", this._likeCard);
+    deleteButton.addEventListener("click", this._deleteCard);
+    this._imageCard.addEventListener("click", () =>
+      this._handleImageClick(this._name, this._link)
+    );
   }
 
   cardCreate() {
@@ -37,8 +61,8 @@ export class Card {
     this._imageCard.src = this._link;
     this._imageCard.alt = this._name;
 
-    _setEventListeners();
+    this._setEventListeners();
 
-    return newCard;
+    return this._newCard;
   }
 }
