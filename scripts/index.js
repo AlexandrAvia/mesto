@@ -1,5 +1,6 @@
 import { FormValidator } from "./FormValidator.js";
-import { Card, initialCards } from "./Card.js";
+import { Card } from "./Card.js";
+import { validationConfig, initialCards } from "./constant.js";
 const popupProf = document.querySelector(".popup_type_profile");
 const popupGallery = document.querySelector(".popup_type_gallery");
 const popupImage = document.querySelector(".popup_type_photo");
@@ -17,14 +18,6 @@ const elements = document.querySelector(".element");
 const popups = document.querySelectorAll(".popup");
 const popupPicture = document.querySelector(".popup__image");
 const popupImageTitle = document.querySelector(".popup__image-title");
-const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit",
-  inactiveButtonClass: "popup__submit_inactive",
-  inputErrorClass: "popup__input_error",
-  errorClass: "popup__error_visible",
-};
 
 const editProfileValidator = new FormValidator(validationConfig, profileForm);
 const addCardValidator = new FormValidator(validationConfig, galleryAddform);
@@ -49,10 +42,10 @@ function closePopupKeyEsc(evt) {
 }
 
 function openPopupProfEdit() {
-  openPopup(popupProf);
   nameInput.value = profileName.textContent;
   jobInput.value = profileProfession.textContent;
   editProfileValidator.resetErrors();
+  openPopup(popupProf);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -66,6 +59,7 @@ openPopupButtonProf.addEventListener("click", openPopupProfEdit);
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 function openPopupGallAdd() {
+  galleryAddform.reset();
   openPopup(popupGallery);
   addCardValidator.disableSubmitButton();
 }
@@ -81,9 +75,7 @@ initialCards.forEach((card) => addCard(card.name, card.link));
 function handleCardSubmitForm(evt) {
   evt.preventDefault();
   addCard(imageTitleform.value, imageSrcForm.value);
-  galleryAddform.reset();
   closePopup(popupGallery);
-  addCardValidator.disableSubmitButton();
 }
 
 galleryAddform.addEventListener("submit", handleCardSubmitForm);
@@ -94,10 +86,10 @@ function cardCreate(link, title) {
 }
 
 function openImage(name, link) {
-  openPopup(popupImage);
   popupImageTitle.textContent = name;
   popupPicture.alt = name;
   popupPicture.src = link;
+  openPopup(popupImage);
 }
 
 popups.forEach((popup) => {
