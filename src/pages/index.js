@@ -4,7 +4,6 @@ import { Card } from "../components/Card.js";
 import { validationConfig, initialCards } from "../scripts/constant.js";
 const popupProf = document.querySelector(".popup_type_profile");
 const popupGallery = document.querySelector(".popup_type_gallery");
-const popupImage = document.querySelector(".popup_type_photo");
 const profileForm = document.querySelector(".popup__form_profile");
 const nameInput = document.querySelector(".popup__input_form_name");
 const jobInput = document.querySelector(".popup__input_form_profession");
@@ -17,8 +16,8 @@ const imageSrcForm = document.querySelector(".popup__input_form_image-src");
 const galleryAddform = document.querySelector(".popup__form_gallery");
 const elements = document.querySelector(".element");
 const popups = document.querySelectorAll(".popup");
-const popupPicture = document.querySelector(".popup__image");
-const popupImageTitle = document.querySelector(".popup__image-title");
+
+/* this._popupImage = document.querySelector(".popup_type_photo"); */
 
 const editProfileValidator = new FormValidator(validationConfig, profileForm);
 const addCardValidator = new FormValidator(validationConfig, galleryAddform);
@@ -26,7 +25,7 @@ const addCardValidator = new FormValidator(validationConfig, galleryAddform);
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
-function openPopup(popup) {
+/* function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupKeyEsc);
 }
@@ -34,13 +33,13 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupKeyEsc);
-}
+} */
 
-function closePopupKeyEsc(evt) {
+/* function closePopupKeyEsc(evt) {
   if (evt.key === "Escape") {
     closePopup(document.querySelector(".popup_opened"));
   }
-}
+} */
 
 function openPopupProfEdit() {
   nameInput.value = profileName.textContent;
@@ -86,14 +85,14 @@ function cardCreate(link, title) {
   return card.cardCreate();
 }
 
-function openImage(name, link) {
+/* function openImage(name, link) {
   popupImageTitle.textContent = name;
   popupPicture.alt = name;
   popupPicture.src = link;
   openPopup(popupImage);
-}
+} */
 
-popups.forEach((popup) => {
+/* popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
       closePopup(popup);
@@ -102,4 +101,4 @@ popups.forEach((popup) => {
       closePopup(popup);
     }
   });
-});
+}); */
