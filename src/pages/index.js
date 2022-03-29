@@ -1,6 +1,7 @@
-import { FormValidator } from "./FormValidator.js";
-import { Card } from "./Card.js";
-import { validationConfig, initialCards } from "./constant.js";
+import "./index.css";
+import { FormValidator } from "../components/FormValidator.js";
+import { Card } from "../components/Card.js";
+import { validationConfig, initialCards } from "../scripts/constant.js";
 const popupProf = document.querySelector(".popup_type_profile");
 const popupGallery = document.querySelector(".popup_type_gallery");
 const popupImage = document.querySelector(".popup_type_photo");

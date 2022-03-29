@@ -12,6 +12,7 @@ export class Card {
 
   _deleteCard = (evt) => {
     evt.target.closest(".element__card").remove();
+    this._newCard = null;
   };
 
   _setEventListeners() {
