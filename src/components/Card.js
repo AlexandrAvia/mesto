@@ -1,8 +1,8 @@
 export class Card {
-  constructor(name, link, cardTemplateSelector, handleImageClick) {
+  constructor(item, cardTemplateSelector, handleImageClick) {
     this._template = document.querySelector(cardTemplateSelector).content;
-    this._name = name;
-    this._link = link;
+    this._name = item.name;
+    this._link = item.link;
     this._handleImageClick = handleImageClick;
   }
 
@@ -12,7 +12,6 @@ export class Card {
 
   _deleteCard = (evt) => {
     evt.target.closest(".element__card").remove();
-    this._newCard = null;
   };
 
   _setEventListeners() {

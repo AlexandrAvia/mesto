@@ -1,29 +1,70 @@
 import "./index.css";
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
-import { validationConfig, initialCards } from "../scripts/constant.js";
-const popupProf = document.querySelector(".popup_type_profile");
-const popupGallery = document.querySelector(".popup_type_gallery");
-const profileForm = document.querySelector(".popup__form_profile");
-const nameInput = document.querySelector(".popup__input_form_name");
-const jobInput = document.querySelector(".popup__input_form_profession");
-const profileName = document.querySelector(".profile__name");
-const profileProfession = document.querySelector(".profile__profession");
-const openPopupButtonGallery = document.querySelector(".profile__add-gallery");
-const openPopupButtonProf = document.querySelector(".profile__edit");
-const imageTitleform = document.querySelector(".popup__input_form_image-title");
-const imageSrcForm = document.querySelector(".popup__input_form_image-src");
-const galleryAddform = document.querySelector(".popup__form_gallery");
-const elements = document.querySelector(".element");
-const popups = document.querySelectorAll(".popup");
+import {
+  validationConfig,
+  initialCards,
+  popupProf,
+  popupGallery,
+  profileForm,
+  nameInput,
+  jobInput,
+  profileName,
+  profileProfession,
+  openPopupButtonGallery,
+  openPopupButtonProf,
+  imageTitleform,
+  imageSrcForm,
+  elements,
+  galleryAddform,
+} from "../constants/constant.js";
+import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import UserInfo from "../components/UserInfo.js";
 
-/* this._popupImage = document.querySelector(".popup_type_photo"); */
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: cardCreateRender,
+  },
+  ".element"
+);
 
-const editProfileValidator = new FormValidator(validationConfig, profileForm);
-const addCardValidator = new FormValidator(validationConfig, galleryAddform);
+function cardCreate(item) {
+  const card = new Card(item, ".element-template", openImage);
+  const elementCard = card.cardCreate();
+  return elementCard;
+}
 
-editProfileValidator.enableValidation();
-addCardValidator.enableValidation();
+function openImage(name, link) {
+  popupWithImage.open(name, link);
+}
+
+function cardCreateRender(item) {
+  const elementCard = cardCreate(item);
+  section.addItem(elementCard);
+}
+
+section.render();
+
+const popupWithImage = new PopupWithImage(".popup_type_photo");
+popupWithImage.setEventListeners();
+const popupProfile = new PopupWithForm(".popup_type_profile", submitProfile);
+
+function submitProfile(data) {
+  const { name, job } = data;
+  userInfo.setUserInfo(name, job);
+  popupProfile.close();
+}
+
+openPopupButtonProf.addEventListener("click", openPopupProf);
+
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  professionselector: ".profile__profession",
+});
 
 /* function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -33,13 +74,13 @@ addCardValidator.enableValidation();
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupKeyEsc);
-} */
+}
 
-/* function closePopupKeyEsc(evt) {
+function closePopupKeyEsc(evt) {
   if (evt.key === "Escape") {
     closePopup(document.querySelector(".popup_opened"));
   }
-} */
+}
 
 function openPopupProfEdit() {
   nameInput.value = profileName.textContent;
@@ -80,19 +121,20 @@ function handleCardSubmitForm(evt) {
 
 galleryAddform.addEventListener("submit", handleCardSubmitForm);
 
-function cardCreate(link, title) {
-  const card = new Card(link, title, ".element-template", openImage);
-  return card.cardCreate();
-}
+const editProfileValidator = new FormValidator(validationConfig, profileForm);
+const addCardValidator = new FormValidator(validationConfig, galleryAddform);
 
-/* function openImage(name, link) {
+editProfileValidator.enableValidation();
+addCardValidator.enableValidation();
+
+function openImage(name, link) {
   popupImageTitle.textContent = name;
   popupPicture.alt = name;
   popupPicture.src = link;
   openPopup(popupImage);
-} */
+}
 
-/* popups.forEach((popup) => {
+popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
       closePopup(popup);
