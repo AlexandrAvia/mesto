@@ -18,6 +18,7 @@ export const imageSrcForm = document.querySelector(
 export const galleryAddform = document.querySelector(".popup__form_gallery");
 export const elements = document.querySelector(".element");
 export const popups = document.querySelectorAll(".popup");
+export const formValidator = {};
 
 export const validationConfig = {
   formSelector: ".popup__form",
