@@ -10,8 +10,10 @@ export class Card {
     this._likeButton.classList.toggle("element__like-button_active");
   };
 
-  _deleteCard = (evt) => {
-    evt.target.closest(".element__card").remove();
+  _deleteCard = () => {
+    this._newCard = document.querySelector(".element__card");
+    this._newCard.remove();
+    this._newCard = null;
   };
 
   _setEventListeners() {
