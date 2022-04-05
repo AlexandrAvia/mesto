@@ -29,31 +29,27 @@ const section = new Section(
   },
   ".element"
 );
-
 function createCard(item) {
   const card = new Card(item, ".element-template", openImage);
   const elementCard = card.cardCreate();
   section.addItem(elementCard);
 }
-
 function openImage(name, link) {
   popupWithImage.open(name, link);
 }
-
 section.render();
-
-const popupWithImage = new PopupWithImage(".popup_type_photo");
-popupWithImage.setEventListeners();
-const popupProfile = new PopupWithForm(".popup_type_profile", submitProfile);
-popupProfile.setEventListeners();
 const popupGallery = new PopupWithForm(".popup_type_gallery", submitCard);
 popupGallery.setEventListeners();
 
 function submitCard(item) {
-  createCard(item);
+  console.log(item);
+  createCard({
+    name: item.place,
+    link: item.url,
+  });
+
   popupGallery.close();
 }
-
 openPopupButtonProf.addEventListener("click", openPopupProf);
 openPopupButtonGallery.addEventListener("click", openPopupGallery);
 
@@ -61,11 +57,6 @@ function openPopupGallery() {
   formValidator["form__gallery"].resetErrors();
   popupGallery.open();
 }
-
-const userInfo = new UserInfo({
-  nameSelector: ".profile__name",
-  professionselector: ".profile__profession",
-});
 
 const enableValidation = (validationConfig) => {
   const formList = Array.from(
@@ -81,6 +72,11 @@ const enableValidation = (validationConfig) => {
 
 enableValidation(validationConfig);
 
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  professionselector: ".profile__profession",
+});
+
 function openPopupProf() {
   formValidator["form__profile"].resetErrors();
   popupProfile.open();
@@ -88,8 +84,15 @@ function openPopupProf() {
   nameInput.value = name;
   jobInput.value = profession;
 }
-
-function submitProfile() {
-  userInfo.setUserInfo(profileName.value, profileProfession.value);
+const submitProfile = (data) => {
+  console.log(data);
+  const { name, profession } = data;
+  userInfo.setUserInfo(name, profession);
   popupProfile.close();
-}
+};
+
+const popupProfile = new PopupWithForm(".popup_type_profile", submitProfile);
+popupProfile.setEventListeners();
+
+const popupWithImage = new PopupWithImage(".popup_type_photo");
+popupWithImage.setEventListeners();
