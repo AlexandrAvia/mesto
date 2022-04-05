@@ -4,17 +4,10 @@ import { Card } from "../components/Card.js";
 import {
   validationConfig,
   initialCards,
-  profileForm,
   nameInput,
   jobInput,
-  profileName,
-  profileProfession,
   openPopupButtonGallery,
   openPopupButtonProf,
-  imageTitleform,
-  imageSrcForm,
-  elements,
-  galleryAddform,
   formValidator,
 } from "../constants/constant.js";
 import Section from "../components/Section.js";
@@ -29,20 +22,20 @@ const section = new Section(
   },
   ".element"
 );
+
 function createCard(item) {
   const card = new Card(item, ".element-template", openImage);
   const elementCard = card.cardCreate();
   section.addItem(elementCard);
 }
+
 function openImage(name, link) {
   popupWithImage.open(name, link);
 }
+
 section.render();
-const popupGallery = new PopupWithForm(".popup_type_gallery", submitCard);
-popupGallery.setEventListeners();
 
 function submitCard(item) {
-  console.log(item);
   createCard({
     name: item.place,
     link: item.url,
@@ -84,12 +77,15 @@ function openPopupProf() {
   nameInput.value = name;
   jobInput.value = profession;
 }
+
 const submitProfile = (data) => {
-  console.log(data);
   const { name, profession } = data;
   userInfo.setUserInfo(name, profession);
   popupProfile.close();
 };
+
+const popupGallery = new PopupWithForm(".popup_type_gallery", submitCard);
+popupGallery.setEventListeners();
 
 const popupProfile = new PopupWithForm(".popup_type_profile", submitProfile);
 popupProfile.setEventListeners();
