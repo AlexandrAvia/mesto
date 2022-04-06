@@ -92,3 +92,5 @@ popupProfile.setEventListeners();
 
 const popupWithImage = new PopupWithImage(".popup_type_photo");
 popupWithImage.setEventListeners();
+
+

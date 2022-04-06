@@ -11,7 +11,6 @@ export class Card {
   };
 
   _deleteCard = () => {
-    this._newCard = document.querySelector(".element__card");
     this._newCard.remove();
     this._newCard = null;
   };
@@ -26,7 +25,9 @@ export class Card {
   }
 
   cardCreate() {
-    this._newCard = this._template.cloneNode(true);
+    this._newCard = this._template
+      .querySelector(".element__card")
+      .cloneNode(true);
     this._imageCard = this._newCard.querySelector(".element__image");
     const imageTitle = this._newCard.querySelector(".element__title");
     this._likeButton = this._newCard.querySelector(".element__like-button");
