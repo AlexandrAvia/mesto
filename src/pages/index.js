@@ -14,10 +14,25 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
+import { api } from "../components/Api.js";
+
+api.getProfile().then((res) => {
+  userInfo.setUserInfo(res.name, res.about);
+});
+
+api.getInitialCards().then((cardList) => {
+  cardList.forEach((data) => {
+    const card = createCard({
+      name: data.name,
+      link: data.link,
+    });
+    section.render(card);
+  });
+});
 
 const section = new Section(
   {
-    items: initialCards,
+    items: [],
     renderer: createCard,
   },
   ".element"
@@ -80,7 +95,10 @@ function openPopupProf() {
 
 const submitProfile = (data) => {
   const { name, profession } = data;
-  userInfo.setUserInfo(name, profession);
+  api.editProfile(name, profession).then(() => {
+    userInfo.setUserInfo(name, profession); //ждём пока ответит сервер
+  });
+
   popupProfile.close();
 };
 
@@ -92,5 +110,3 @@ popupProfile.setEventListeners();
 
 const popupWithImage = new PopupWithImage(".popup_type_photo");
 popupWithImage.setEventListeners();
-
-
