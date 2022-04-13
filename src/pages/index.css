@@ -37,3 +37,5 @@
 @import url(../blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(../blocks/popup/__submit/_inactive/popup__submit_inactive.css);
 @import url(../blocks/popup/__fieldset/popup__fieldset.css);
+@import url(../blocks/element/__like-group/element__like-group.css);
+@import url(../blocks/popup/__title/_confirmation/popup__title_confirmation.css);

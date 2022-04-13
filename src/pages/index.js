@@ -3,7 +3,6 @@ import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import {
   validationConfig,
-  initialCards,
   nameInput,
   jobInput,
   openPopupButtonGallery,
@@ -25,6 +24,7 @@ api.getInitialCards().then((cardList) => {
     const card = createCard({
       name: data.name,
       link: data.link,
+      likes: data.likes,
     });
     section.render(card);
   });
@@ -44,6 +44,7 @@ function submitCard(item) {
     createCard({
       name: res.name,
       link: res.link,
+      likes: res.likes,
     });
   });
 

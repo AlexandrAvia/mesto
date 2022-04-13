@@ -1,6 +1,5 @@
 class Api {
   constructor({ baseUrl, headers }) {
-    // тело конструктора
     this._baseUrl = baseUrl;
     this._headers = headers;
   }

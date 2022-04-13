@@ -3,6 +3,7 @@ export class Card {
     this._template = document.querySelector(cardTemplateSelector).content;
     this._name = item.name;
     this._link = item.link;
+    this._likes = item.likes;
     this._handleImageClick = handleImageClick;
   }
 
@@ -14,6 +15,13 @@ export class Card {
     this._newCard.remove();
     this._newCard = null;
   };
+
+  _setLikes() {
+    const likeCountElement = this._newCard.querySelector(
+      ".element__like-count"
+    );
+    likeCountElement.textContent = this._likes.length;
+  }
 
   _setEventListeners() {
     const deleteButton = this._newCard.querySelector(".element__delete-button");
@@ -31,7 +39,7 @@ export class Card {
     this._imageCard = this._newCard.querySelector(".element__image");
     const imageTitle = this._newCard.querySelector(".element__title");
     this._likeButton = this._newCard.querySelector(".element__like-button");
-
+    this._setLikes();
     imageTitle.textContent = this._name;
     this._imageCard.src = this._link;
     this._imageCard.alt = this._name;
