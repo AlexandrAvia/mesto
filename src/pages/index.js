@@ -30,6 +30,26 @@ api.getInitialCards().then((cardList) => {
   });
 });
 
+const submitProfile = (res) => {
+  const { name, profession } = res;
+  api.editProfile(name, profession).then((res) => {
+    userInfo.setUserInfo(res.name, res.about);
+  });
+  popupProfile.close();
+};
+
+function submitCard(item) {
+  api.addCard(item.place, item.url).then((res) => {
+    console.log(res);
+    createCard({
+      name: res.name,
+      link: res.link,
+    });
+  });
+
+  popupGallery.close();
+}
+
 const section = new Section(
   {
     items: [],
@@ -50,14 +70,6 @@ function openImage(name, link) {
 
 section.render();
 
-function submitCard(item) {
-  createCard({
-    name: item.place,
-    link: item.url,
-  });
-
-  popupGallery.close();
-}
 openPopupButtonProf.addEventListener("click", openPopupProf);
 openPopupButtonGallery.addEventListener("click", openPopupGallery);
 
@@ -92,15 +104,6 @@ function openPopupProf() {
   nameInput.value = name;
   jobInput.value = profession;
 }
-
-const submitProfile = (data) => {
-  const { name, profession } = data;
-  api.editProfile(name, profession).then(() => {
-    userInfo.setUserInfo(name, profession); //ждём пока ответит сервер
-  });
-
-  popupProfile.close();
-};
 
 const popupGallery = new PopupWithForm(".popup_type_gallery", submitCard);
 popupGallery.setEventListeners();
