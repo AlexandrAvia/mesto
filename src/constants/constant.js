@@ -1,5 +1,6 @@
 export const popupProf = document.querySelector(".popup_type_profile");
 export const popupGallery = document.querySelector(".popup_type_gallery");
+export const profileAvatar = document.querySelector(".profile__avatar");
 
 export const nameInput = document.querySelector(".popup__input_form_name");
 export const jobInput = document.querySelector(".popup__input_form_profession");
