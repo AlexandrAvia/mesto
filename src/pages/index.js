@@ -40,31 +40,50 @@ api.getInitialCards().then((cardList) => {
 
 const submitProfile = (res) => {
   const { name, profession } = res;
-  api.editProfile(name, profession).then((res) => {
-    userInfo.setUserInfo(res.name, res.about);
-  });
+  popupProfile.renderLoading(true);
+  api
+    .editProfile(name, profession)
+    .then((res) => {
+      userInfo.setUserInfo(res.name, res.about);
+    })
+    .finally(() => {
+      popupProfile.renderLoading(false);
+    });
+
   popupProfile.close();
 };
 
 function submitCard(item) {
-  api.addCard(item.place, item.url).then((res) => {
-    createCard({
-      name: res.name,
-      link: res.link,
-      likes: res.likes,
-      id: res._id,
-      userId: userId,
-      ownerId: res.owner._id,
+  popupGallery.renderLoading(true);
+  api
+    .addCard(item.place, item.url)
+    .then((res) => {
+      createCard({
+        name: res.name,
+        link: res.link,
+        likes: res.likes,
+        id: res._id,
+        userId: userId,
+        ownerId: res.owner._id,
+      });
+    })
+    .finally(() => {
+      popupProfile.renderLoading(false);
     });
-  });
 
   popupGallery.close();
 }
 
 function submitAvatar(fields) {
-  api.avatarUpdate(fields.avatar).then((res) => {
-    userInfo.setAvatar(res.avatar);
-  });
+  popupAvatar.renderLoading(true);
+  api
+    .avatarUpdate(fields.avatar)
+    .then((res) => {
+      userInfo.setAvatar(res.avatar);
+    })
+    .finally(() => {
+      popupAvatar.renderLoading(false);
+    });
 
   popupAvatar.close();
 }
