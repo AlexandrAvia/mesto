@@ -47,6 +47,7 @@ const submitProfile = (res) => {
       userInfo.setUserInfo(res.name, res.about);
       popupProfile.close();
     })
+    .catch(console.log)
     .finally(() => {
       popupProfile.renderLoading(false);
     });
@@ -67,6 +68,7 @@ function submitCard(item) {
       });
       popupGallery.close();
     })
+    .catch(console.log)
     .finally(() => {
       popupProfile.renderLoading(false);
     });
@@ -80,6 +82,7 @@ function submitAvatar(fields) {
       userInfo.setAvatar(res.avatar);
       popupAvatar.close();
     })
+    .catch(console.log)
     .finally(() => {
       popupAvatar.renderLoading(false);
     });
@@ -101,21 +104,30 @@ function createCard(item) {
     (id) => {
       popupConfirm.open();
       popupConfirm.changeSubmit(() => {
-        api.deleteCard(id).then((res) => {
-          card.deleteCard();
-          popupConfirm.close();
-        });
+        api
+          .deleteCard(id)
+          .then((res) => {
+            card.deleteCard();
+            popupConfirm.close();
+          })
+          .catch(console.log);
       });
     },
     (id) => {
       if (card.isLiked()) {
-        api.deleteLike(id).then((res) => {
-          card.setLikes(res.likes);
-        });
+        api
+          .deleteLike(id)
+          .then((res) => {
+            card.setLikes(res.likes);
+          })
+          .catch(console.log);
       } else {
-        api.addLike(id).then((res) => {
-          card.setLikes(res.likes);
-        });
+        api
+          .addLike(id)
+          .then((res) => {
+            card.setLikes(res.likes);
+          })
+          .catch(console.log);
       }
     }
   );

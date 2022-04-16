@@ -7,17 +7,13 @@ class Api {
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .catch(console.log);
+    }).then(this._checkResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .catch(console.log);
+    }).then(this._checkResponse);
   }
 
   editProfile(name, about) {
@@ -28,9 +24,7 @@ class Api {
         name,
         about,
       }),
-    })
-      .then(this._checkResponse)
-      .catch(console.log);
+    }).then(this._checkResponse);
   }
 
   addCard(name, link) {
@@ -41,36 +35,28 @@ class Api {
         name,
         link,
       }),
-    })
-      .then(this._checkResponse)
-      .catch(console.log);
+    }).then(this._checkResponse);
   }
 
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .catch(console.log);
+    }).then(this._checkResponse);
   }
 
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .catch(console.log);
+    }).then(this._checkResponse);
   }
 
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .catch(console.log);
+    }).then(this._checkResponse);
   }
 
   avatarUpdate(link) {
@@ -80,9 +66,7 @@ class Api {
       body: JSON.stringify({
         avatar: link,
       }),
-    })
-      .then(this._checkResponse)
-      .catch(console.log);
+    }).then(this._checkResponse);
   }
 
   _checkResponse(res) {
