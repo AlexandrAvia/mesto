@@ -45,12 +45,11 @@ const submitProfile = (res) => {
     .editProfile(name, profession)
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about);
+      popupProfile.close();
     })
     .finally(() => {
       popupProfile.renderLoading(false);
     });
-
-  popupProfile.close();
 };
 
 function submitCard(item) {
@@ -66,12 +65,11 @@ function submitCard(item) {
         userId: userId,
         ownerId: res.owner._id,
       });
+      popupGallery.close();
     })
     .finally(() => {
       popupProfile.renderLoading(false);
     });
-
-  popupGallery.close();
 }
 
 function submitAvatar(fields) {
@@ -80,12 +78,11 @@ function submitAvatar(fields) {
     .avatarUpdate(fields.avatar)
     .then((res) => {
       userInfo.setAvatar(res.avatar);
+      popupAvatar.close();
     })
     .finally(() => {
       popupAvatar.renderLoading(false);
     });
-
-  popupAvatar.close();
 }
 
 const section = new Section(
