@@ -18,25 +18,15 @@ import { api } from "../components/Api.js";
 
 let userId;
 
-api.getProfile().then((res) => {
-  userInfo.setUserInfo(res.name, res.about);
-  userInfo.setAvatar(res.avatar);
-  userId = res._id;
-});
-
-api.getInitialCards().then((cardList) => {
-  cardList.forEach((res) => {
-    createCard({
-      name: res.name,
-      link: res.link,
-      likes: res.likes,
-      id: res._id,
-      userId: userId,
-      ownerId: res.owner._id,
-    });
-    section.render();
-  });
-});
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([res, card]) => {
+    userInfo.setUserInfo(res.name, res.about);
+    userInfo.setAvatar(res.avatar);
+    userId = res._id;
+    console.log(userId);
+    section.render(card);
+  })
+  .catch(console.log);
 
 const submitProfile = (res) => {
   const { name, profession } = res;
@@ -58,14 +48,7 @@ function submitCard(item) {
   api
     .addCard(item.place, item.url)
     .then((res) => {
-      createCard({
-        name: res.name,
-        link: res.link,
-        likes: res.likes,
-        id: res._id,
-        userId: userId,
-        ownerId: res.owner._id,
-      });
+      renderCreateCard({ ...res, userId });
       popupGallery.close();
     })
     .catch(console.log)
@@ -91,7 +74,7 @@ function submitAvatar(fields) {
 const section = new Section(
   {
     items: [],
-    renderer: createCard,
+    renderer: renderCreateCard,
   },
   ".element"
 );
@@ -99,6 +82,7 @@ const section = new Section(
 function createCard(item) {
   const card = new Card(
     item,
+    userId,
     ".element-template",
     openImage,
     (id) => {
@@ -132,14 +116,17 @@ function createCard(item) {
     }
   );
   const elementCard = card.cardCreate();
-  section.addItem(elementCard);
+  return elementCard;
+}
+
+function renderCreateCard(item) {
+  const cardElement = createCard(item);
+  section.addItem(cardElement);
 }
 
 function openImage(name, link) {
   popupWithImage.open(name, link);
 }
-
-section.render();
 
 openPopupButtonProf.addEventListener("click", openPopupProf);
 openPopupButtonGallery.addEventListener("click", openPopupGallery);
