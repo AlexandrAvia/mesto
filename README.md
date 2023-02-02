@@ -7,3 +7,5 @@
 - [Ссылка на проект](https://alexandravia.github.io/mesto/)
 
 Стек: JS, CSS, webpack.
+
+Проект завершен.
